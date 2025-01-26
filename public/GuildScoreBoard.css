@@ -1,0 +1,62 @@
+/*  Developed by Matthew Bass
+    Project = "Guild Score Board"
+    for MSSE 661 Web Software Development
+    Final Project
+    Regis University
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    height: 100%;
+    width: 100%;
+    min-height: 750px;
+}
+
+header {
+    height: 50px;
+    width: 100%;
+}
+
+nav {
+    display: block;
+}
+
+nav ul {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+}
+
+li {
+    float: left;
+    padding: 0 20px;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+footer {
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
