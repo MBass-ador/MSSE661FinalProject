@@ -1,0 +1,1 @@
+This Repository hosts the final project for "GuildScoreBoard",  an administrative app for gaming guild administrators and players.
