@@ -1,0 +1,23 @@
+{
+    "name": "guildscoreboard-backend",
+    "version": "1.0.0",
+    "description": "MSSE 661 final project backend APIs MySQL",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon ./src"
+    },
+    "author": "Matthew Bass",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "morgan": "^1.9.1",
+        "mysql2": "^3.12.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.2"
+    }
+}

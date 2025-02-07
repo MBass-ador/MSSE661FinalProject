@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- Developed by Matthew Bass
+     for MSSE 661 Web Software Development
+     Final project
+     Regis University
+     Week 2 -->
+
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href='./css/GuildScoreBoard.css' />
+        <title>Basic Fluid Layout</title>
+
+    </head>
+
+    <body>
+        <div class="wrapper">
+
+            <div class="content">
+                <div class="items">
+                    <h2>Login</h2>
+
+                    <form novalidate>
+                      <label for="username">
+                        <span>Username:</span>
+                        <input id="username" type="text" placeholder="Username" />
+                      </label>
+
+                      <label for="password">
+                        <span>Password:</span>
+                        <input id="password" type="password" placeholder="Password" />
+                      </label>
+
+                      <button onclick="doLogin(event)">Submit</button>
+                      
+                      <a href="./registration.html">Sign Up</a>
+                    </form> 
+
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <footer>
+        <p id="foot">Developed by Matthew Bass: mbass001@regis.edu</p>
+    </footer>
+
+    <script src="src/GuildScoreBoard.js"></script>
+
+</html>
