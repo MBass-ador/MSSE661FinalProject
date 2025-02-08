@@ -9,7 +9,7 @@ at Regis University
 <br>
 <br>
 <p>Functionality is divided between a web server and a backend API for database access.</p>
----
+
 
 ### Features
 - dynamic layout
