@@ -1,8 +1,8 @@
 # Guild Scoreboard
 
-## Created as a Final Project for 
-## MSSE 661 Web Software Development
-## at Regis University
+Created as a Final Project for 
+MSSE 661 Web Software Development
+at Regis University
 
 The app is a scoreboard for use by gaming guild administrators.
 
