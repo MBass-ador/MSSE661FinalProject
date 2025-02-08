@@ -1,5 +1,5 @@
 # Guild Scoreboard
-
+---
 Created as a Final Project for 
 MSSE 661 Web Software Development
 at Regis University
