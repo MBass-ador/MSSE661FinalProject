@@ -5,7 +5,7 @@ MSSE 661 Web Software Development
 at Regis University
 ---
 
-The app is a scoreboard for use by gaming guild administrators.
+The app is a scoreboard for use by gaming guild administrators and members.
 
 ---
 Functionality is divided between a web server and a backend API for database access
