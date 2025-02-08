@@ -3,13 +3,12 @@
 Created as a Final Project for 
 MSSE 661 Web Software Development
 at Regis University
-
+<br>
 
 <p>The app is a scoreboard for use by gaming guild administrators and members.</p>
 <br>
-<br>
 <p>Functionality is divided between a web server and a backend API for database access.</p>
-
+<br>
 
 ### Features
 - dynamic layout
