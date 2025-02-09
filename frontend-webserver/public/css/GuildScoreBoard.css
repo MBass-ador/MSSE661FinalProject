@@ -5,58 +5,185 @@
     Regis University
 */
 
+
+.wrapper {
+    height: 100vh;
+    width: 100%;
+    min-height: 750px;
+    background-image: url("../images/page_background.png");
+    background-size: cover;
+    background-position: center;
+}
+
+
+/* Flex Styling */
+
 * {
     margin: 0;
     padding: 0;
-}
-
-.wrapper {
-    height: 100%;
-    width: 100%;
-    min-height: 750px;
-}
-
-header {
-    height: 50px;
-    width: 100%;
-}
-
-nav {
-    display: block;
-}
-
-nav ul {
-    display: flex;
-    width: 100%;
+  }
+  
+  nav {
+    display: flex; /* block */
+    padding-top: 12px;
+    padding-bottom: 12px;
+    align-items: center;
+  }
+  
+  nav ul {
+    /* width: 200px; */
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+
+    width: 100%;
     flex-flow: row nowrap;
     justify-content: space-evenly;
-}
-
-li {
-    float: left;
-    padding: 0 20px;
-}
-
-ul,
-li {
-    list-style: none;
-}
-
-.content {
+  }
+  
+  .content {
+    
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 15vh;
+    /*margin-top: 10vh;*/
+  }
+  
+  .items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    height: 100vh;
-}
+    width: 200px;
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #d3d3d3;
+    margin-top: 15%;
+    margin-bottom: 25%;
+    margin-top: 15%;
+    background-image: url("../images/item_background.png");
+    border-color: black;
+    color: goldenrod;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 
-
-footer {
-    height: 100px;
+  }
+  
+  .items form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
+  }
+  
+  label {
+    padding-bottom: 20px;
+    width: 80%;
+  }
+  
+  label > span {
+    display: none;
+  }
+  
+  input {
+    height: 20px;
+    width: 100%;
+  }
+  
+  button {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    width: 100px;
+    background-color: #256fde;
+    color: white;
+    margin-bottom: 10px;
+  }
+  
+  footer {
     position: absolute;
     bottom: 0;
+    height: 15%;
+    width: 100%;
+
     display: flex;
     justify-content: center;
     align-items: center;
-}
+    background-image: url("../images/head_foot.png");
+    background-position: center center;
+    border: 3px;
+    border-color: black;
+    border-style: solid;
+  }
+
+/* Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .main {
+    min-height: 100%;
+    width: 100%;
+  }
+  
+  header {
+    height: 15%;
+    width: 100%;
+    background-image: url("../images/head_foot.png");
+    border: 3px;
+    border-color: black;
+    border-style: solid;
+  }
+  
+  li {
+    padding: 0 10px;
+    width: 18%;
+    margin: auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+  
+  ul,
+  li {
+    list-style: none;
+  }
+
+  li a {
+    color: goldenrod;
+    font-size: 1.75vw;
+  }
+  
+  h1 {
+    
+    font-size: 3.5vw;
+    background-color: black;
+  }
+
+  #foot {
+    color: goldenrod;
+    font-size: 2vw;
+  }
+
+  form a.auth_button {
+    a:link {
+        color: goldenrod;
+        background-color: black;
+    }
+    a:visited {
+        color: darkred;
+        background-color: black;
+    }
+    a:hover {
+        color: dodgerblue;
+        background-color: black;
+    }
+  }
+
+  

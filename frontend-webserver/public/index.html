@@ -10,16 +10,21 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href='./css/GuildScoreBoard.css' />
-        <title>Basic Fluid Layout</title>
+        <title>Login</title>
 
     </head>
 
     <body>
         <div class="wrapper">
 
+            <header>
+                <!--  No nav on registration page  -->
+            </header>
+
             <div class="content">
                 <div class="items">
-                    <h2>Login</h2>
+                    <h1>Login</h1>
+                    <br>
 
                     <form novalidate>
                       <label for="username">
@@ -34,9 +39,9 @@
 
                       <button onclick="doLogin(event)">Submit</button>
                       
-                      <a href="./registration.html">Sign Up</a>
+                      <a class='auth_button' href="./registration.html">Sign Up</a>
                     </form> 
-
+ 
                 </div>
             </div>
         </div>
