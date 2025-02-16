@@ -1,6 +1,6 @@
 {
     "name": "guildscoreboard-frontend",
-    "version": "4.0.0",
+    "version": "5.0.0",
     "description": "front end web server for GuildScoreboard",
     "main": "index.js",
     "scripts": {

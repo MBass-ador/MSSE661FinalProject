@@ -22,6 +22,9 @@ exports.ALL_MONTHS_RAID_DATA = `SELECT * FROM monthly_raid`;
 // retrieve single member's monthly raid data (by 'member' name)
 exports.SINGLE_MEMB_MONTHLY_DATA = `SELECT * FROM monthly_raid WHERE member = ?`;
 
+// create new member row of monthly data
+exports.NEW_ROW = `INSERT INTO monthly_raid (member) VALUES (?)`
+
 // enter day1 score for a member (by member name)
 exports.ENTER_DAY1_SCORES = `UPDATE monthly_raid SET day1 = ? WHERE member = ?`;
 
@@ -32,12 +35,14 @@ exports.ENTER_DAY2_SCORES = `UPDATE monthly_raid SET day2 = ? WHERE member = ?`;
 exports.ENTER_DAY3_SCORES = `UPDATE monthly_raid SET day3 = ? WHERE member = ?`;
 
 // caculate and fill raidTotal (d1 + d2 + d3) (by membber name)
-exports.CALC_RAID_TOTAL =   `UPDATE monthly_raid 
-                                SET raidTotal = day1+day2+day3 
-                                WHERE member = ?`;
+exports.CALC_RAID_TOTAL =   `UPDATE monthly_raid SET raidTotal = ? WHERE member = ?`;
 
 // delete a member's monthly raid data (by member name)
 exports.DELETE_MEMB_MONTHLY_DATA = `DELETE FROM monthly_raid WHERE member = ?`;
 
-// update a member's monthly raid data (by member name)
-exports.UPDATE_MEMB_MONTHLY_DATA = `UPDATE monthly_raid SET day1 = ?, day2 = ?, day3 = ? WHERE member = ?`;
+// update a member's monthly raid data (by member name) 
+exports.UPDATE_MEMB_MONTHLY_DATA = `UPDATE monthly_raid 
+                                    SET day1 = ?, 
+                                    day2 = ?, 
+                                    day3 = ? 
+                                    WHERE member = ?`;

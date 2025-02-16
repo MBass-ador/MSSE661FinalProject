@@ -25,7 +25,7 @@ exports.SINGLE_MEMB = `SELECT * FROM members WHERE name = ?`;
 exports.INSERT_MEMB = `INSERT INTO members (name) VALUES (?)`;
 
 // update a member's details
-exports.UPDATE_MEMB = `UPDATE members SET avg_points = ?, num_raids = ? WHERE name = ?`;
+exports.UPDATE_MEMB = `UPDATE members SET name = ? avg_points = ?, num_raids = ? WHERE name = ?`;
 
 // delete a member (from table) by name
 exports.DELETE_MEMB = `DELETE FROM members WHERE name = ?`;

@@ -8,17 +8,24 @@ Written by Matthew Bass
 // Authentication Functions
 
 // login function
-const doLogin = function(e) {
-    e.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+const doLogin = async (e)  => {
+  e.preventDefault();
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  const response = await doLogin({ username, password }); 
   
-    login({
-      username: username,
-      password: password
-    }).then(function(res) {
-      window.location.href = 'home.html';
-    });
+  const { 
+      auth, 
+      access_token, 
+      refresh_token 
+  } = response;
+
+setStorage('isAuth', auth);
+setStorage('access_token', access_token);
+setStorage('refresh_token', refresh_token);
+
+window.location.href = 'home.html';
   };
 
 
@@ -30,16 +37,33 @@ const doLogin = function(e) {
     const password = document.getElementById('password').value;
   
     register({
-      username: username,
-      email: email,
-      password: password
-    }).then(function(res) {
-      window.location.href = 'home.html';
+      username,
+      email,
+      password
+    }).then((res) => {
+      window.location.href = '/';
     });
-  };
+};
   
   
   // log out function (not yet functional)
-  const doLogout = function(e) {
+  const doLogout = (e) => {
     e.preventDefault();
+    logout();
+    window.location.href = '/';
   };
+  
+
+  // check if user is logged in (self executing)
+  (() => {
+    if (storageHasData()) {
+      const isAuth = getStorage('isAuth');
+  
+      if (!isAuth) {
+        document.getElementById('logout').style.display = 'none';
+      } else {
+        document.getElementById('logout').style.display = 'block';
+      }
+    }
+  
+})();

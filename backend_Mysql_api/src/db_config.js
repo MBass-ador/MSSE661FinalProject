@@ -2,8 +2,12 @@
 
 // imports
 const mysql = require('mysql2');
-const scoreQueries = require('./queries/scoreboard.queries');
-const membQueries = require('./queries/member.queries');
+
+const { CREATE_MONTHLY_RAID_TABLE } = require('./queries/scoreboard.queries');
+const { CREATE_MEMBERS_TABLE } = require('./queries/member.queries');
+const { CREATE_USERS_TABLE }  = require('./queries/user.queries.js');
+
+const query = require('./utils/query.js');
 
 // host
 const host = process.env.DB_HOST || 'localhost';
@@ -17,30 +21,55 @@ const password = process.env.DB_PASSWORD || 'sesame';
 // database name
 const database = process.env.DB_NAME || 'scoreboard';
 
-// create connection
-const con = mysql.createConnection ({
-    host,
-    user,
-    password,
-    database
-});
-
-
-// prepare database tables
-con.connect(function (err) {
-    if (err) throw err;
-    console.log('db connection established');
+// create connection and wrap in a promise
+const connection = async () => 
+    // wrap in a promise
+    new Promise((resolve, reject) => {
+        // define connection
+        const con = mysql.createConnection ({
+            host,
+            user,
+            password,
+            database
+        });
+        
+        con.connect((err) => {
+            if (err) { 
+                reject(err);
+                return;
+            }
+        });
     
-    con.query(membQueries.CREATE_MEMBERS_TABLE, function (err, result) {
-        if (err) throw err;
-        console.log('members table ready to use.');
+        resolve(con);
     });
-
-    con.query(scoreQueries.CREATE_MONTHLY_RAID_TABLE, function (err, result) {
-        if (err) throw err;
-        console.log("this month's raid table ready to use.");
-    });
-});
+    // make connection
+    (async () => {
+        const _con = await connection().catch((err) => {
+            throw err;
+        });
+        // create users table if doesn't exist
+        const userTableCreated = await query(_con, CREATE_USERS_TABLE).catch(
+            (err) => {
+                console.log(err);
+            }
+        );
+        // create members table if doesn't exist
+        const memberTableCreated = await query(_con, CREATE_MEMBERS_TABLE).catch(
+            (err) => {
+                console.log(err);
+            }
+        );
+        // create monthly raid table if doesn't exist
+        const makeMonthlyRaidTable = await query(_con, CREATE_MONTHLY_RAID_TABLE).catch(
+            (err) => {
+                console.log(err);
+            }
+        );
+        // make sure tables exist
+    if (!!userTableCreated && !!memberTableCreated && !!makeMonthlyRaidTable) {
+        console.log('user, member, and monthly raid tables ready to use');
+    }
+})();
 
 // export connection as "con"
 module.exports = con;

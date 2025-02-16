@@ -1,22 +1,31 @@
 // establishing routes for member data
 
 
-const controller = require('../controllers/member.controller');
-const express = require('express'); 
+const express = require('express');
+
+const {
+    getAllMembs,
+    getMemb,
+    addMemb,
+    updateMemb,
+    deleteMemb
+} = require('../controllers/member.controller');
+ 
+const canAccess = require('../middleware/auth.middleware');
 
 // new router
 const memberRoutes = express.Router();
 
 // routes for member data.         
 memberRoutes
-    .get('/all', controller.getAllMembs)
-    .post('/new', controller.addMemb);
+    .get('/all', canAccess, getAllMembs)
+    .post('/new', canAccess, addMemb);
 
-// routes by member id.       
+// routes by member name.       
 memberRoutes
-    .get('/get:id', controller.getMemb)
-    .put('/edit:id', controller.updateMemb)
-    .delete('/del:id', controller.deleteMemb);
+    .get('/get:name', canAccess, getMemb)
+    .put('/edit:name', canAccess, updateMemb)
+    .delete('/del:name', canAccess, deleteMemb);
 
 // exporting routes
 module.exports = memberRoutes;
