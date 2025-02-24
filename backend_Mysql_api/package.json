@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "nodemon ./src",
-        "test": "NODE_ENV = 'test' moca ./tests/*" 
+        "test": "NODE_ENV='test' mocha ./tests/*"
     },
     "author": "Matthew Bass",
     "license": "ISC",
@@ -19,8 +19,8 @@
         "mysql2": "^3.12.0"
     },
     "devDependencies": {
-        "chai": "^5.1.2",
-        "chai-http": "^5.1.1",
+        "chai": "4.4.0",
+        "chai-http": "4.4.0",
         "mocha": "^11.1.0",
         "nodemon": "^2.0.2"
     }

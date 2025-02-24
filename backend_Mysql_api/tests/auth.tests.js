@@ -21,10 +21,9 @@ describe('Auth API service', () => {
       .post('/api/auth/register')
       .send(testUser)
       .end((err, resp) => {
+        if (err) done(err);
         console.log(resp.body);
-        expect(resp.body.username).to.eql(expectedUser.username);
-        expect(resp.body.email).to.eql(expectedUser.email);
-        expect(resp.body.password).to.eql(expectedUser.password);
+        
         expect(resp.body).to.eql(expected);
         done();
       });
@@ -72,8 +71,7 @@ describe('Auth API service', () => {
   it('should not POST a login for a user that does not exist', (done) => {
     const testUser = {
       username: 'nonexistent',
-      password: 'password',
-      email: 'none@nowhere.com'
+      password: 'password'
     };
 
     chai
@@ -81,6 +79,7 @@ describe('Auth API service', () => {
       .post('/api/auth/login')
       .send(testUser)
       .end((err, resp) => {
+        expect(resp.status).to.eql(500);
         expect(resp.body).to.eql({ msg: 'unable to retrieve user' });
         done();
       });

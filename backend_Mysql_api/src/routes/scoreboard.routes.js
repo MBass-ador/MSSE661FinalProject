@@ -36,8 +36,8 @@ scoreboardRoutes
     .post('/enter/day3/:name', canAccess, enterDay3Scores);
 
 // route to calculate total (by member name)
-scoreboardRoutes
-    .post('/total/:name', canAccess, membRaidTotal);
+/*scoreboardRoutes
+    .post('/total/:name', canAccess, membRaidTotal);*/
   
 // exporting routes
 module.exports = scoreboardRoutes;

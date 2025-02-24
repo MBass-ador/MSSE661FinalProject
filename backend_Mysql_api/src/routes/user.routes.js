@@ -11,7 +11,7 @@ const userRoutes = express.Router();
 // routes to retrieve or modify user 
 userRoutes.get('/me', canAccess, getMe); // /api/user/me
 
-userRoutes.post('/me/update', canAccess, updateUser); // /api/user/me/update
+/*userRoutes.put('/me/update:name', canAccess, updateUser); // /api/user/me/update*/
 
 // exporting routes
 module.exports = userRoutes;

@@ -1,7 +1,7 @@
 //imports
 const bcrypt = require('bcryptjs');
 
-const connection = require('../db-config');
+const connection = require('../db_config');
 
 const {INSERT_NEW_USER} = require('../queries/auth.queries');
 
@@ -33,7 +33,7 @@ exports.register = async (req, res) => {
   const user = await query(con, GET_USER_BY_NAME, [req.body.username]).catch(
     (err) => {
       res.status(500);
-      res.send({ msg: 'unable to retrieve user.' });
+      res.send({ msg: 'unable to retrieve user' });
     }
   );
 

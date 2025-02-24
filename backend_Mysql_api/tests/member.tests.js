@@ -36,7 +36,7 @@ describe('member API service', function() {
       }); 
 
      // create
-    it.skip('should POST a single member', function (done) {
+    it('should POST a single member', function (done) {
         const testMember = { name: 'testMember' };
         const expected = { message: 'testMember successfully added' };
     

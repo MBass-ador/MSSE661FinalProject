@@ -13,7 +13,8 @@ exports.CREATE_MONTHLY_RAID_TABLE = `CREATE TABLE IF NOT EXISTS monthly_raid (
     day1 int DEFAULT 0,
     day2 int DEFAULT 0,
     day3 int DEFAULT 0,
-    raidTotal int DEFAULT 0
+    raidTotal int DEFAULT 0,
+    PRIMARY KEY (id)
 )`;
 
 // retrieve all members' monthly raid data

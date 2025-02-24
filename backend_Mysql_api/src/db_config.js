@@ -5,7 +5,7 @@ const mysql = require('mysql2');
 
 const { CREATE_MONTHLY_RAID_TABLE } = require('./queries/scoreboard.queries');
 const { CREATE_MEMBERS_TABLE } = require('./queries/member.queries');
-const { CREATE_USERS_TABLE }  = require('./queries/user.queries.js');
+const { CREATE_USERS_TABLE }  = require('./queries/auth.queries.js');
 
 const query = require('./utils/query.js');
 
@@ -65,11 +65,11 @@ const connection = async () =>
                 console.log(err);
             }
         );
-        // make sure tables exist
+        // make sure tables exist*/
     if (!!userTableCreated && !!memberTableCreated && !!makeMonthlyRaidTable) {
         console.log('user, member, and monthly raid tables ready to use');
     }
 })();
 
 // export connection as "con"
-module.exports = con;
+module.exports = connection;

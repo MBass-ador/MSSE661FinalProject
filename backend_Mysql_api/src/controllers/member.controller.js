@@ -1,5 +1,5 @@
 // imports
-const connection = require('../db-config');
+const connection = require('../db_config');
 
 const {
     ALL_MEMBS,

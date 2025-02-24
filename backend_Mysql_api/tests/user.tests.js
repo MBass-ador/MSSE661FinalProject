@@ -28,7 +28,7 @@ describe('User API service', () => {
   });
 
   // run one time then skip once working
-  it.skip('should PUT updated credentials for a logged in user', (done) => {
+  it('should PUT updated credentials for a logged in user', (done) => {
     const updatedUser = {
       username: 'admin2',
       password: 'newPassword',

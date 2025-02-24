@@ -2,7 +2,7 @@
 
 
 const jwt = require('jsonwebtoken');
-const jwtconfig = require('../jwt-config');
+const jwtconfig = require('../jwt_config');
 
 // retrieve token
 module.exports = function(req, res, next) {

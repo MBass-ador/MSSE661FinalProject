@@ -1,5 +1,5 @@
 // imports
-const con = require('../db-config');
+const con = require('../db_config');
 
 const {
     ALL_MONTHS_RAID_DATA,

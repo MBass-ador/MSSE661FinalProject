@@ -36,7 +36,7 @@ describe("scoreboard API service", function () {
     });
 
     // create member/row
-    it.skip('should POST a single row of member raid data', function (done) {
+    it('should POST a single row of member raid data', function (done) {
         const newRow = { name: 'admin' };
         const expected = { message: 'test successfully added' };
     
