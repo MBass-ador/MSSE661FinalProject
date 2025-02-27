@@ -27,14 +27,14 @@
                     <br>
 
                     <form novalidate>
-                      <label for="username">
+                      <label for="formInputUsername">
                         <span>Username:</span>
-                        <input id="username" type="text" placeholder="Username" />
+                        <input id="formInputUsername" type="text" placeholder="Username" />
                       </label>
 
-                      <label for="password">
+                      <label for="formInputPassword">
                         <span>Password:</span>
-                        <input id="password" type="password" placeholder="Password" />
+                        <input id="formInputPassword" type="password" placeholder="Password" />
                       </label>
 
                       <button onclick="doLogin(event)">Submit</button>
@@ -51,6 +51,9 @@
         <p id="foot">Developed by Matthew Bass: mbass001@regis.edu</p>
     </footer>
 
-    <script src="src/GuildScoreBoard.js"></script>
-
+    <script src="src/api.config.js"></script>
+    <script src="src/simple-storage.js"></script>
+    <script src="src/service-helpers.js"></script>
+    <script src="src/auth.service.js"></script>
+    <script src="src/auth.js"></script>
 </html>

@@ -18,14 +18,14 @@ const memberRoutes = express.Router();
 
 // routes for member data.         
 memberRoutes
-    .get('/all', canAccess, getAllMembs)
-    .post('/new', canAccess, addMemb);
+    .get('/all', canAccess, getAllMembs)         //  http://localhost:3000/api/members/all
+    .post('/new', canAccess, addMemb);          //  http://localhost:3000/api/members/new
 
 // routes by member name.       
 memberRoutes
-    .get('/get:name', canAccess, getMemb)
-    .put('/edit:name', canAccess, updateMemb)
-    .delete('/del:name', canAccess, deleteMemb);
+    .get('/get:name', canAccess, getMemb)          //  http://localhost:3000/api/members/get
+    .put('/edit:name', canAccess, updateMemb)     //  http://localhost:3000/api/members/edit
+    .delete('/del:name', canAccess, deleteMemb); //  http://localhost:3000/api/members/del
 
 // exporting routes
 module.exports = memberRoutes;

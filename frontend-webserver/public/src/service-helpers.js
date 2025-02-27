@@ -9,55 +9,93 @@ Final Project
 const access_token = storageHasData() ? getStorage('access_token') : '';
 const token = `Bearer ${access_token}`;
 
+// define options
+const DEFAULT_OPTIONS = {
+  headers: {
+    'Content-Type': 'application/json'
+  },
+};
+
+const DEFAULT_OPTIONS_WITH_AUTH = {
+  headers: {
+    Authorization: token,
+    'Content-Type': 'application/json'
+  },
+};
+
+const OPTIONS_JUST_AUTH = {
+  headers: {
+    Authorization: token
+  },
+};
+
 
 // Functions for HTTP Requests
 
 
-// HTTP GET
-const _get = async (url) => {
-  const response = await fetch(url, {
+/**
+ *    HTTP GET
+ * 
+ * @param {String} url        - address to send request
+ * @param {Object} options    - specified above
+ * @returns                   - JSON response from server
+ */
+const _get = async (url, options = DEFAULT_OPTIONS_WITH_AUTH) => {
+  const res = await fetch(url, {
     method: 'GET',
-    headers: {
-      Authorization: token,
-      'Content-Type': 'application/json',
-    },
+    ...options
   });
-  return response.json();
+  return res.json();
 };
 
 
-// HTTP POST
-const _post = async (url, data) => {
-  const response = await fetch(url, {
+/**
+ *    HTTP POST
+ * 
+ * @param {String} url        - address to send request
+ * @param {Object} data       - data to send
+ * @param {Object} options    - specified above
+ * @returns                   - JSON response from server
+ */
+const _post = async (url, data, options = DEFAULT_OPTIONS) => {
+  const res = await fetch(url, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
+    ...options,
+    body: JSON.stringify(data)
   });
-  return response.json();
+  return res.json();
 };
 
-// HTTP PUT
-const _put = async (url, data) => {
-  const response = await fetch(url, {
+
+/**
+ *    HTTP PUT
+ * 
+ * @param {String} url        - address to send request
+ * @param {Object} data       - data to send
+ * @param {Object} options    - specified above
+ * @returns                   - JSON response from server
+ */
+const _put = async (url, data, options = DEFAULT_OPTIONS_WITH_AUTH) => {
+  const res = await fetch(url, {
     method: 'PUT',
-    headers: {
-      Authorization: token,
-    },
-    body: JSON.stringify(data),
+    ...options,
+    body: JSON.stringify(data)
   });
-  return response.json();
+  return res.json();
 }
 
-// HTTP DELETE
-const _delete = async (url, data) => {
-  const response = await fetch(url, {
+
+/**
+ *    HTTP DELETE
+ * 
+ * @param {String} url        - address to send request
+ * @param {Object} options    - specified above
+ * @returns                   - JSON response from server
+ */
+const _delete = async (url, options = DEFAULT_OPTIONS_WITH_AUTH) => {
+  const res = await fetch(url, {
     method: 'DELETE',
-    headers: {
-      Authorization: token,
-    },
-    body: JSON.stringify(data),
+    ...options,
   });
-  return response.json();
-}
+  return res.json();
+};

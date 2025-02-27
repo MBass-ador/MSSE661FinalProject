@@ -36,7 +36,7 @@ app.use(cors());
 // routes
 app.use('/api/scoreboard', scoreboardRoutes); // http://localhost:3000/api/scoreboard
 app.use('/api/members', memberRoutes);       // http://localhost:3000/api/members
-app.use('/api/users', userRoutes);          // http://localhost:3000/api/users
+app.use('/api/users', userRoutes);          // http://localhost:3000/api/user
 app.use('/api/auth', authRoutes);          // http://localhost:3000/api/auth
 
 

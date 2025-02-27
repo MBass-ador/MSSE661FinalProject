@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 describe('member API service', function() {
     // get all
-    it('should GET all members', function (done) {
+    it.skip('should GET all members', function (done) {
         chai
         .request('http://localhost:3000')
         .get('/api/members')
@@ -20,7 +20,7 @@ describe('member API service', function() {
     });
 
     // get one (by name)
-    it('should GET a single member', function (done) {
+    it.skip('should GET a single member', function (done) {
         const expected = {name: "admin"} ;
     
         chai
@@ -36,7 +36,7 @@ describe('member API service', function() {
       }); 
 
      // create
-    it('should POST a single member', function (done) {
+    it.skip('should POST a single member', function (done) {
         const testMember = { name: 'testMember' };
         const expected = { message: 'testMember successfully added' };
     

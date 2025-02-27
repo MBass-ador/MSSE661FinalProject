@@ -19,25 +19,25 @@ const canAccess = require('../middleware/auth.middleware');
 // new router
 const scoreboardRoutes = express.Router();
 
-// route for all monthly data.         
-scoreboardRoutes.get('/', canAccess, getAllMonthlyData);
+// route for all monthly data         
+scoreboardRoutes.get('/getall', canAccess, getAllMonthlyData);    // http://localhost:3000/api/scoreboard/getall
 
-// routes by member name.      
+// routes by member name (CRUD)      
 scoreboardRoutes
-    .get('/get/:name', canAccess, getMembMonthlyData)
-    .post('/new', canAccess, addMembRow)
-    .put('/update/:name', canAccess, updateMembMonthlyData)
-    .delete('/del/:name', canAccess, deleteMembMonthlyData);
+    .get('/getone:name', canAccess, getMembMonthlyData)          // http://localhost:3000/api/scoreboard/getone
+    .post('/new', canAccess, addMembRow)                        // http://localhost:3000/api/scoreboard/new
+    .put('/update:name', canAccess, updateMembMonthlyData)     // http://localhost:3000/api/scoreboard/update
+    .delete('/del:name', canAccess, deleteMembMonthlyData);   // http://localhost:3000/api/scoreboard/del
 
-// routes to enter scores (by member name)
+// routes to enter scores (for all members)
 scoreboardRoutes
-    .post('/enter/day1/:name', canAccess, enterDay1Scores)
-    .post('/enter/day2/:name', canAccess, enterDay2Scores)
-    .post('/enter/day3/:name', canAccess, enterDay3Scores);
+    .post('/enter/day1', canAccess, enterDay1Scores)       // http://localhost:3000/api/scoreboard/enter/day1
+    .post('/enter/day2', canAccess, enterDay2Scores)      // http://localhost:3000/api/scoreboard/enter/day2
+    .post('/enter/day3', canAccess, enterDay3Scores);    // http://localhost:3000/api/scoreboard/enter/day3
 
 // route to calculate total (by member name)
-/*scoreboardRoutes
-    .post('/total/:name', canAccess, membRaidTotal);*/
+//scoreboardRoutes
+    //.post('/total:name', canAccess, membRaidTotal);
   
 // exporting routes
 module.exports = scoreboardRoutes;

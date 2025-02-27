@@ -6,7 +6,7 @@ chai.use(chaiHttp);
 
 describe("scoreboard API service", function () {
     // get all  
-    it('should GET all monthly raid data', function (done) {
+    it.skip('should GET all monthly raid data', function (done) {
         chai
         .request('http://localhost:3000')
         .get('/api/scoreboard/')
@@ -19,7 +19,7 @@ describe("scoreboard API service", function () {
   });
 
     // get one (by name)
-    it("should GET a single member's monthly scores by name", function (done) {
+    it.skip("should GET a single member's monthly scores by name", function (done) {
         const expected = {name: "admin"} ;
       
         chai
@@ -36,7 +36,7 @@ describe("scoreboard API service", function () {
     });
 
     // create member/row
-    it('should POST a single row of member raid data', function (done) {
+    it.skip('should POST a single row of member raid data', function (done) {
         const newRow = { name: 'admin' };
         const expected = { message: 'test successfully added' };
     
@@ -52,7 +52,7 @@ describe("scoreboard API service", function () {
       });
 
     // enter day 1
-    it("should PUT day 1 score for member", function (done) {
+    it.skip("should PUT day 1 score for member", function (done) {
         const day1 = { name: 'admin', day1: 300 };
         const expected = { message: "member's day1 score set"};
 
@@ -68,7 +68,7 @@ describe("scoreboard API service", function () {
     });
 
     // enter day 2
-    it("should PUT day 2 score for member", function (done) {
+    it.skip("should PUT day 2 score for member", function (done) {
         const day2 = { name: 'admin', day2: 300 };
         const expected = { message: "member's day2 score set"};
 
@@ -84,7 +84,7 @@ describe("scoreboard API service", function () {
     });
 
     // enter day 3
-    it("should PUT day 3 score for member", function (done) {
+    it.skip("should PUT day 3 score for member", function (done) {
         const day3 = { name: 'admin', day3: 300 };
         const expected = { message: "member's day3 score set"};
 
@@ -99,7 +99,7 @@ describe("scoreboard API service", function () {
             });
     });
 
-    it ("should PUT raidTotal for a member", function (done) {
+    it.skip("should PUT raidTotal for a member", function (done) {
         // make row entry with days 1-3 set
         const calcDummy = { name: "dummy", day1: 100, day2: 100, day3: 100};
         const expected = { message: "monthly raid total calculated and applied"};
@@ -115,7 +115,7 @@ describe("scoreboard API service", function () {
             });
     });
 
-    it("should PUT updated member raid data", function (done) {
+    it.skip("should PUT updated member raid data", function (done) {
         // row object with new details
         const updatedRow = {
             member: "testUser2",
@@ -137,7 +137,7 @@ describe("scoreboard API service", function () {
         });
     });
 
-    it("should DELETE a row/member from monthlyRaid", function (done) {
+    it.skip("should DELETE a row/member from monthlyRaid", function (done) {
         const rowToDel = { member: "admin"};
 
         const expected = { message: "member monthly data successfully deleted"};

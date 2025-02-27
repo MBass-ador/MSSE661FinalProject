@@ -1,4 +1,6 @@
 // local browser data functions
+
+
 const setStorage = (key, data) => {
     const dataAsString = JSON.stringify(data); // data = new Object()
     const encodedData = btoa(dataAsString); // {}
@@ -7,7 +9,13 @@ const setStorage = (key, data) => {
   
   const getStorage = (key) => {
     const encodedData = localStorage.getItem(key);
+    
+    if (!encodedData) {
+      return null;
+    }
+
     const decodedData = atob(encodedData);
+
     return JSON.parse(decodedData); // {}
   };
   

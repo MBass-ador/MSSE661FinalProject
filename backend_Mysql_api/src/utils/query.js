@@ -1,4 +1,4 @@
-// making promise-based query function for mysql2
+// making promise-based query function for mysql
 
 module.exports = async (con, query, params) =>
     new Promise((resolve, reject) => {

@@ -2,7 +2,7 @@
 
 // handle 404 errors
 exports.error404 = (req, res, next) => {
-    next ({ message: 'Resource Not Found', status: 404 });
+    next ({ message: 'resource not found', status: 404 });
 };
 
 // handle 500 errors

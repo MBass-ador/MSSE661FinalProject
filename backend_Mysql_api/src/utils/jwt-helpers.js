@@ -6,7 +6,8 @@ const jwtconfig = {
     refresh: 'megasecretrefreshsecret',
   };
 
-  // store for refresh tokens (multiple user's tokens)
+  // array storage for refresh tokens 
+  // (multiple user's tokens)
 const refreshTokens = [];
 
 // create a new auth token

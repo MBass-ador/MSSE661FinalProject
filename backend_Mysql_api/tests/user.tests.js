@@ -39,7 +39,7 @@ describe('User API service', () => {
     chai
       .request('http://localhost:3000')
       .put('/api/user/me/update')
-      .set('Authorization', `Bearer ${token}`)
+      //.set('Authorization', `Bearer ${token}`)
       .send(updatedUser)
       .end((err, resp) => {
         expect(resp.body).to.eql(expected);

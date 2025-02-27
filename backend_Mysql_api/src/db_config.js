@@ -5,7 +5,7 @@ const mysql = require('mysql2');
 
 const { CREATE_MONTHLY_RAID_TABLE } = require('./queries/scoreboard.queries');
 const { CREATE_MEMBERS_TABLE } = require('./queries/member.queries');
-const { CREATE_USERS_TABLE }  = require('./queries/auth.queries.js');
+const { CREATE_USERS_TABLE }  = require('./queries/user.queries.js');
 
 const query = require('./utils/query.js');
 

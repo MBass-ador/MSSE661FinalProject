@@ -25,19 +25,19 @@
 
           <form novalidate>
 
-            <label for="username">
-            <span>Username:</span>
-            <input id="username" type="text" placeholder="Username" />
+            <label for="formInputUsernameReg">
+              <span>User Name:</span>
+              <input id="formInputUsernameReg" type="text" placeholder="Username" />
             </label>
 
-            <label for="email">
-            <span>Email:</span>
-            <input id="email" type="email" placeholder="Email" />
+            <label for="formInputEmailReg">
+              <span>Email:</span>
+              <input id="formInputEmailReg" type="email" placeholder="Email" />
             </label>
 
-            <label for="password">
-            <span>Password:</span>
-            <input id="password" type="password" placeholder="Password" />
+            <label for="formInputPasswordReg">
+              <span>Password:</span>
+              <input id="formInputPasswordReg" type="password" placeholder="Password" />
             </label>
  
             <button onclick="doRegister(event)">Register</button>
@@ -56,8 +56,10 @@
     </div>
   </body>
 
-  <script src="./src/service-helpers.js"></script>
-  <script src="./src/auth.service.js"></script>
-  <script src="./src/app.js"></script>
+  <script src="src/api.config.js"></script>
+    <script src="src/simple-storage.js"></script>
+    <script src="src/service-helpers.js"></script>
+    <script src="src/auth.service.js"></script>
+    <script src="src/auth.js"></script>
 
 </html>
