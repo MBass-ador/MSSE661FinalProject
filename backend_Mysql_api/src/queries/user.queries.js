@@ -1,5 +1,4 @@
-// create new table:  user_id(pk), username, email, password
-exports.CREATE_USERS_TABLE = `CREATE TABLE IF NOT EXISTS users(
+export const CREATE_USERS_TABLE = `CREATE TABLE IF NOT EXISTS users(
     user_id int NOT NULL AUTO_INCREMENT,
     username varchar(255) NOT NULL UNIQUE,
     email varchar(255) NOT NULL,
@@ -10,28 +9,31 @@ exports.CREATE_USERS_TABLE = `CREATE TABLE IF NOT EXISTS users(
 // CRUD queries
 
 // add new user 
-exports.INSERT_NEW_USER = (username, email, password) => 
-  `INSERT INTO users (username, email, password) VALUES ($(username), $(email), $(password))`;
+export const INSERT_NEW_USER = (username, email, password) => 
+  `INSERT INTO users (username, email, password) 
+            VALUES (?, ?, ?)`;
 
 
 // get user               (by name)               (does not return password)
-exports.GET_USER_BY_NAME = (username) =>
-  `SELECT user_id, username, email FROM users WHERE username = $(username)`;
+export const GET_USER_BY_NAME = () => 
+  `SELECT user_id, username, email FROM users WHERE username = ?`;
 
 // get user               (by name)               (includes password)
-exports.GET_USER_WITH_PASSWORD_BY_NAME = (username) =>
-  `SELECT * FROM users WHERE username = $(username)`;
+export const GET_USER_WITH_PASSWORD_BY_NAME = () => 
+  `SELECT * FROM users WHERE username = ?`;   
 
 
 // change user details    (by name)
-exports.UPDATE_USER = (username, email, password) =>
-  `UPDATE users SET 
-    username = $(username), 
-    email = $(email), 
-    password = $(password) 
-  WHERE username = $(username)`;
+export const UPDATE_USER = ()  => 
+  `UPDATE users 
+                SET 
+                  username = ?, 
+                  email = ?, 
+                  password = ?
+                WHERE username = ?`;
 
 
 // delete user            (by name)
-exports.DELETE_USER = (username) =>
-  `DELETE FROM users WHERE username = $(username)`;
+export const DELETE_USER = ()  => 
+  `DELETE FROM users 
+                  WHERE username = ?`;

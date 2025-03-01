@@ -1,13 +1,13 @@
 // creating database connection object and exporting it
 
 // imports
-const mysql = require('mysql2');
+import { createConnection } from 'mysql';
 
-const { CREATE_MONTHLY_RAID_TABLE } = require('./queries/scoreboard.queries');
-const { CREATE_MEMBERS_TABLE } = require('./queries/member.queries');
-const { CREATE_USERS_TABLE }  = require('./queries/user.queries.js');
+import { CREATE_MONTHLY_RAID_TABLE } from './queries/scoreboard.queries.js';
+import { CREATE_MEMBERS_TABLE } from './queries/member.queries.js';
+import { CREATE_USERS_TABLE } from './queries/user.queries.js';
 
-const query = require('./utils/query.js');
+import query from './utils/query.js';
 
 // host
 const host = process.env.DB_HOST || 'localhost';
@@ -16,7 +16,7 @@ const host = process.env.DB_HOST || 'localhost';
 const user = process.env.DB_USER || 'root';
 
 // user password
-const password = process.env.DB_PASSWORD || 'sesame';
+const password = process.env.DB_PASSWORD || 'password-1234';
 
 // database name
 const database = process.env.DB_NAME || 'scoreboard';
@@ -26,7 +26,7 @@ const connection = async () =>
     // wrap in a promise
     new Promise((resolve, reject) => {
         // define connection
-        const con = mysql.createConnection ({
+        const con = createConnection ({
             host,
             user,
             password,
@@ -42,17 +42,16 @@ const connection = async () =>
     
         resolve(con);
     });
-    // make connection
+    // make async connection
     (async () => {
         const _con = await connection().catch((err) => {
             throw err;
         });
+
         // create users table if doesn't exist
-        const userTableCreated = await query(_con, CREATE_USERS_TABLE).catch(
-            (err) => {
-                console.log(err);
-            }
-        );
+        const userTableCreated = await query(_con, CREATE_USERS_TABLE)
+        .catch( (err) => {console.log(err);
+        });
         // create members table if doesn't exist
         const memberTableCreated = await query(_con, CREATE_MEMBERS_TABLE).catch(
             (err) => {
@@ -72,4 +71,4 @@ const connection = async () =>
 })();
 
 // export connection as "con"
-module.exports = connection;
+export default connection;

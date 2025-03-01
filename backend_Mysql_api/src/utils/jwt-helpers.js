@@ -1,4 +1,6 @@
-const jwt = require('jsonwebtoken');
+import plugin from 'jsonwebtoken';
+const { sign, 
+        verify } = plugin;
 
 // jwt secrets for initial and refresh tokens
 const jwtconfig = {
@@ -12,23 +14,23 @@ const refreshTokens = [];
 
 // create a new auth token
 const generateAccessToken = (id, expiresIn) =>
-    jwt.sign({ id }, jwtconfig.access, expiresIn);
+    sign({ id }, jwtconfig.access, expiresIn);
 
 // create a new refresh token
 const generateRefreshToken = (id, expiresIn) =>
-    jwt.sign({ id }, jwtconfig.refresh, expiresIn);
+    sign({ id }, jwtconfig.refresh, expiresIn);
 
 // function to check if token is valid
 const verifyToken = (token, secret, req, res) => {
     try {
-      return jwt.verify(token, secret);
+      return verify(token, secret);
     } catch {
       res.status(500).send({ auth: false, message: 'Invalid token.' });
     }
   };
 
 // export jwt helpers
-module.exports = {
+export {
     jwtconfig,
     refreshTokens,
     generateAccessToken,

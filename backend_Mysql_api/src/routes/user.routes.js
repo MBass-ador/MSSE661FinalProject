@@ -1,5 +1,5 @@
 // imports
-const express = require('express');
+/*const express = require('express');
 
 const { 
     getUser,
@@ -19,4 +19,4 @@ userRoutes.put('/:name', canAccess, updateUser); // http://localhost:3000/api/us
 userRoutes.delete('/:name', canAccess, deleteUser); // http://localhost:3000/api/user
 
 // exporting routes
-module.exports = userRoutes;
+module.exports = userRoutes;*/

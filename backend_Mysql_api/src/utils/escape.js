@@ -1,4 +1,4 @@
-const escape = require('mysql2').escape;
+const escape = require('mysql').escape;
 
 /**
  * Escape all request body values to protect from SQL injection

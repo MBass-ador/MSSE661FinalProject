@@ -1,23 +1,22 @@
 // imports
-const express = require("express");
-const cors =    require("cors");
-const logger =  require("morgan");
-const bodyParser = require("body-parser");
+import express from "express";
+import cors from "cors";
+import logger from "morgan";
+import bodyParser from "body-parser";
 
-const scoreboardRoutes = require("./routes/scoreboard.routes");
-const memberRoutes =     require("./routes/member.routes");
+//const scoreboardRoutes = require("./routes/scoreboard.routes");
+//const memberRoutes =     require("./routes/member.routes");
 
-const authRoutes = require("./routes/auth.routes");
-const userRoutes = require("./routes/user.routes");
+import authRoutes from "./routes/auth.routes.js";
+//import userRoutes from "./routes/user.routes";
 
-const {
-    error404,
-    error500
-} = require("./middleware/errors.middleware");
+import { 
+        error404, 
+        error500 } from "./middleware/errors.middleware.js";
 
 // set up app,  default port: 3000,  logLevel: dev
 const app = express();
-port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 const logLevel = process.env.LOG_LEVEL || "dev";
 const env = process.env.NODE_ENV;
 
@@ -28,15 +27,15 @@ if (env !== "test") {
 
 // parse requests  https:github.com/expressjs/body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json() );
 
 // facilitate cross origin requests
 app.use(cors());
 
 // routes
-app.use('/api/scoreboard', scoreboardRoutes); // http://localhost:3000/api/scoreboard
-app.use('/api/members', memberRoutes);       // http://localhost:3000/api/members
-app.use('/api/users', userRoutes);          // http://localhost:3000/api/user
+//app.use('/api/scoreboard', scoreboardRoutes); // http://localhost:3000/api/scoreboard
+//app.use('/api/members', memberRoutes);       // http://localhost:3000/api/members
+//app.use('/api/users', userRoutes);          // http://localhost:3000/api/user
 app.use('/api/auth', authRoutes);          // http://localhost:3000/api/auth
 
 

@@ -1,6 +1,7 @@
 {
     "name": "guildscoreboard-backend",
     "version": "5.0.0",
+    "type" : "module",
     "description": "MSSE 661 final project backend APIs MySQL",
     "main": "index.js",
     "scripts": {
@@ -16,7 +17,7 @@
         "express": "^4.17.1",
         "jsonwebtoken": "^8.5.1",
         "morgan": "^1.9.1",
-        "mysql2": "^3.12.0"
+        "mysql": "^2.18.1"
     },
     "devDependencies": {
         "chai": "4.4.0",
