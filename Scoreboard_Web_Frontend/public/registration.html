@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- Written by Matthew Bass
+     for MSSE 661 Web Software Development
+     Regis University
+     Final Project -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./css/GuildScoreBoard.css">
+    <title>Register</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+        
+      <header>
+  <!--  No nav on registration page  -->
+      </header>
+
+      <div class="content">
+        <div class="items">
+
+          <h1>Register</h1>
+          <br>
+
+          <form novalidate>
+
+            <label for="formInputUsernameReg">
+              <span>User Name:</span>
+              <input id="formInputUsernameReg" type="text" placeholder="Username" />
+            </label>
+
+            <label for="formInputEmailReg">
+              <span>Email:</span>
+              <input id="formInputEmailReg" type="email" placeholder="Email" />
+            </label>
+
+            <label for="formInputPasswordReg">
+              <span>Password:</span>
+              <input id="formInputPasswordReg" type="password" placeholder="Password" />
+            </label>
+ 
+            <button onclick="doRegister(event)">Register</button>
+
+            <a class='auth_button' href="/">Already signed up?</a>
+            
+          </form>
+
+        </div>
+      </div>
+
+      <footer>
+        <p id="foot">Created by Matthew Bass: mbass001@regis.edu</p>
+      </footer>
+
+    </div>
+  </body>
+
+  <script src="src/api.config.js"      type="module"></script>
+  <script src="src/simple-storage.js"  type="module"></script>
+  <script src="src/service-helpers.js" type="module"></script>
+  <script src="src/auth.service.js"    type="module"></script>
+  <script src="src/auth.js"            type="module"></script>
+
+</html>
