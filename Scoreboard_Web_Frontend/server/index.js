@@ -19,29 +19,35 @@ const app = express();
 // listen on default port 4000
 const port = process.env.PORT || 4000;
 
+
 // Get directory name
 const __filename = fileURLToPath(import.meta.url);
-
 const __dirname = path.dirname(__filename);
-
 // Correct the path to the public directory
 const __publicPath = path.join(__dirname, '../public');
 
-console.log('serving static files from __publicPath:', __publicPath);
-//console.log('Serving static files from:', path.join(__dirname, 'public'));
+console.log('serving static files from __publicPath:\n', __publicPath);
 
 // use content in folder "public"
 app.use(express.static(__publicPath));
 
 
-// route for css  http://localhost:4000/css
-app.use('/css', express.static(path.join(__publicPath, 'public/css')));
+// route for css  http://localhost:4000/public/css
+app.use('/css', express.static(path.join(__publicPath, 'css')));
 
 // route for js(for browser) folder http://localhost:4000/js
-app.use('/js', express.static(path.join(__publicPath, 'public/src')));
+const jsPath = path.join(__publicPath, 'src');
+console.log('Serving JS files from:\n', jsPath);
+app.use('/js', express.static(jsPath));
 
-// route for images http://localhost:4000/images
-app.use('/images', express.static(path.join(__publicPath, 'public/images')));
+// route for images http://localhost:4000/public/images
+app.use('/images', express.static(path.join(__publicPath, 'images')));
+
+// serve index.html as default route
+app.get('/', (req, res) => {
+  console.log('serving index.html');
+  res.sendFile(path.join(__publicPath, 'index.html'));
+});
 
 
 // listen on port {'port' = 4000} and log

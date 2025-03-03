@@ -23,37 +23,37 @@ const AUTH_API = `${BASE_API_URL}/auth`; // http://localhost:3000/api/auth
 /**
  * @class AuthService
  * 
- * handles authentication services
+ *        handles authentication services
  */
 class AuthService {
 
 
   /**
-  * posts form data to register API
+  *   posts form data to register API
   * 
   * @param {Object} formData - registration data to send
   */
-  register = (formData) => {
+  register = async (formData) => {
     console.log('registering user with supplied data:', formData);
 
-    return _post(`${AUTH_API}/register`, formData);
+    return await _post(`${AUTH_API}/register`, formData);
   };
 
   
   /**
-  * posts form data to login API
+  *   posts form data to login API
   * 
   * @param {Object} formData - login data to send
   */
   login = (formData) => {
     console.log('logging in user with supplied data:', formData);
 
-    return _post(`${AUTH_API}/login`, formData);
+    return  _post(`${AUTH_API}/login`, formData);
   };
 
 
   /**
-  * sets expiration time for tokens
+  *   sets expiration time for tokens
   * 
   * @param {number} maxExpiration - max expiration time in seconds
   */
@@ -68,7 +68,7 @@ class AuthService {
 
 
   /**
-  * checks authentication status
+  *   checks authentication status
   * 
   * @returns -   boolean 
   *              whether user is authenticated
@@ -83,9 +83,9 @@ class AuthService {
 
 
   /**
-  * checks token expiration
-  *   using "expires_in" value from local storage
-  *     and the token itself
+  *   checks token expiration
+  *     using "expires_in" value from local storage
+  *       and the token itself
   * 
   * @returns -   boolean
   *              whether token is expired
@@ -120,9 +120,9 @@ class AuthService {
 
 
   /**
-  * logs out user
-  *   clears local storage
-  *     redirects back to index.html (login page)
+  *   logs out user
+  *     clears local storage
+  *       redirects back to index.html (login page)
   */
   logout = () => {
     console.log('logging out user, clearing local storage, and redirecting to login page.');

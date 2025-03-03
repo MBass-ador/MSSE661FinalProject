@@ -34,12 +34,18 @@ export const register = async (req, res) => {
         email, 
         password } = req.body;
 
-    console.log('Received data:', { username, email, password });
+    //console.log('received data:', { username, email, password });
+
+    // Check if all required fields are present
+    if (!username || !email || !password) {
+        return res.status(400).json({ msg: 'All fields are required' });
+    }
 
     // make async connection
     const con = await connection()
     .catch((err) => {
-        throw err;;
+        console.error('error connecting to the database:', err);
+        return res.status(500).json({ msg: 'error connecting to the database' });
     });
 
     // check if user already exists
@@ -51,12 +57,14 @@ export const register = async (req, res) => {
         );
 
         if (existingUser.length > 0) {
+            //console.log('User already exists:', username);
+            
             return res  // username already exists
-                    .status(400)
+                    .status(403)
                     .json({msg: 'user already exists',});
         }
     } catch (error) {
-        console.error(error);
+        console.error("error checking db for user", error);
         return res  // can't get response from db
                 .status(500)
                 .json({msg: 'error checking db for user'});
@@ -77,11 +85,14 @@ export const register = async (req, res) => {
     // create new user
     try {
         await query(con, INSERT_NEW_USER(), [username, email, hashedPassword]);
+        
+        //console.log('User created successfully:', username);
+        
         return res  // success :)
                 .status(201)
                 .json({ msg: 'user created successfully' });
     } catch (error) {
-        console.error(error);
+        //console.error("error saving to db", error);
         return res  // sadness :(
                 .status(501)
                 .json({ msg: 'error saving to db'  });
@@ -114,7 +125,7 @@ export const login = async (req, res) => {
             GET_USER_WITH_PASSWORD_BY_NAME(),
             [username] // pass as array
         );
-        console.log( 'db reports: user found' );
+        //console.log( 'found existing user:', existingUser[0] );
         
         if (existingUser.length > 0) {
             // check for matching password
@@ -125,7 +136,7 @@ export const login = async (req, res) => {
                 // if passwords do not match
                 if (!validPass) {
                     return res  // return error
-                        .status(400)
+                        .status(401)
                         .json({ msg: 'invalid password for specified user' });
                 } else {
                 // if passwords DO match
@@ -136,8 +147,8 @@ export const login = async (req, res) => {
                 // add refresh token to server side active token array
                 refreshTokens.push(refreshToken);
 
-                console.log('added refresh token:\n', refreshToken, '\n');
-                console.log('Current refresh tokens:\n', refreshTokens.join('\n'), '\n');
+                //console.log('added refresh token:\n', refreshToken, '\n');
+                //console.log('Current refresh tokens:\n', refreshTokens.join('\n'), '\n');
 
                 // build response, including tokens
                 return res
@@ -152,18 +163,18 @@ export const login = async (req, res) => {
                     })
                 }
             } catch (error) {
-                console.error('error comparing passwords:', error);
+                //console.error('error comparing passwords:', error);
                 return res
                     .status(500)
                     .json({ msg: 'error attempting to match passwords' });
             }
         } else {
             return res  // user does not exist
-                    .status(400)
+                    .status(404)
                     .json({msg: 'db returned: user not found',});
         }
     } catch (err) {
-        console.error('error checking DB for user:', err);
+        
         return res
                 .status(500)
                 .json({ msg: 'error checking db for user' });
@@ -186,8 +197,8 @@ export const logout = async (req, res) => {
         return res.status(400).json({ error: 'no refresh token found in request' });
     }
 
-    console.log('received refresh token:\n', refresh_token, '\n');
-    console.log('current refresh tokens:\n', refreshTokens.join('\n'), '\n');
+    //console.log('received refresh token:\n', refresh_token, '\n');
+    //console.log('current refresh tokens:\n', refreshTokens.join('\n'), '\n');
 
     // Remove refresh token from active tokens array
     try {
@@ -195,12 +206,12 @@ export const logout = async (req, res) => {
         if (index > -1) {
             refreshTokens.splice(index, 1);
         }
-        console.log('updated refresh tokens:\n', refreshTokens.join('\n'), '\n');
+        //console.log('updated refresh tokens:\n', refreshTokens.join('\n'), '\n');
         return res
             .status(200)
             .json({ msg: 'user logged out successfully' });
     } catch (error) {
-        console.error('error removing refresh token from server storage:', error);
+        //console.error('error removing refresh token from server storage:', error);
         return res
             .status(500)
             .json({ error: 'error removing refresh token from server storage' });
@@ -226,8 +237,8 @@ export const token = async (req, res) => {
                 .json({ error: 'no refresh token found in request' });
     }
 
-    console.log('received refresh token:\n', refresh_token, '\n');
-    console.log('current refresh tokens:\n', refreshTokens.join('\n'), '\n');
+    //console.log('received refresh token:\n', refresh_token, '\n');
+    //console.log('current refresh tokens:\n', refreshTokens.join('\n'), '\n');
 
     // Check if the refresh token is in the active tokens array
     if (!refreshTokens.includes(refresh_token)) {
@@ -239,7 +250,7 @@ export const token = async (req, res) => {
     // Verify the refresh token
     try {
         const decoded = verifyToken(refresh_token, jwtconfig.refresh);
-        console.log('decoded refresh token:\n', decoded, '\n');
+        //console.log('decoded refresh token:\n', decoded, '\n');
 
         // Generate a new access token
         const accessToken = generateAccessToken(decoded, { expiresIn: 86400 });
@@ -255,7 +266,7 @@ export const token = async (req, res) => {
                 });
 
     } catch (error) {
-        console.error('error verifying refresh token:', error);
+        //console.error('error verifying refresh token:', error);
         return res
                 .status(403)
                 .json({ error: 'invalid refresh token' });

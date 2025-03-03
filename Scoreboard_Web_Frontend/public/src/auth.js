@@ -18,7 +18,6 @@ import { setStorage } from './simple-storage.js';
  * @param {Event} e  - form submission event
  */
 export const doLogin = async (e) => {
-  alert('doLogin function called');
   // overide defaults and get login credentials from form
   e.preventDefault();
 
@@ -66,9 +65,10 @@ export const doLogin = async (e) => {
     alert('user login failed, please try again');
   }
 };
-
 // Attach doLogin to the window object
 window.doLogin = doLogin;
+
+
 
 /**
  *    register function
@@ -76,7 +76,9 @@ window.doLogin = doLogin;
  * @param {Event} e  - form submission event
  */
 export const doRegister = async (e) => {
-  // overide defaults and get registration entriess from form
+  console.log('doRegister function called');
+  
+  // overide defaults and get registration entries from form
   e.preventDefault();
 
   // get username, email, and password from form
@@ -84,7 +86,8 @@ export const doRegister = async (e) => {
   const email = document.getElementById('formInputEmailReg').value;
   const password = document.getElementById('formInputPasswordReg').value;
 
-  console.log('attempting registration with username:', username);
+  console.log('attempting registration with:');
+  console.log('username:', username);
   console.log('Email:', email);
   console.log('password:private');
 
@@ -96,6 +99,8 @@ export const doRegister = async (e) => {
       password,
     });
 
+    console.log('registration response:', res);
+
     // when finished, go to login
     if (res) {
       console.log('registration successful, redirecting to login page');
@@ -103,11 +108,15 @@ export const doRegister = async (e) => {
       window.location.href = '/';
     }
   } catch (err) {
-    console.error('Registration error:', err);
+    console.error('registration error:', err);
 
     alert('user registration failed, try again');
   }
 };
+// Attach doRegister to the window object
+window.doRegister = doRegister;
+console.log('doRegister function attached to window object');
+
 
 
 /**
@@ -116,8 +125,13 @@ export const doRegister = async (e) => {
  * @param {Event} e  - form submission event
  */
 export const doLogout = (e) => {
+  console.log('doLogout function called');
   // overide defaults
   e.preventDefault();
   // call logout
   authService.logout();
+  // Redirect to login page
+  window.location.href = '/';
 };
+// Attach doLogout to the window object
+window.doLogout = doLogout;

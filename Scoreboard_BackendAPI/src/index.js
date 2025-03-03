@@ -30,14 +30,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json() );
 
 // facilitate cross origin requests 
-// ONLY from intended frontend server
+// Allow requests from any origin for development purposes (postman)
+app.use(cors());
+
+/*              More restrictive CORS policy for production (v1.0)
 app.use(cors({
   origin: 'http://localhost:4000', // Frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
-}));
+}));*/
 
-// routes
+// routes           (future paths commented out for developemnt)
+
 //app.use('/api/scoreboard', scoreboardRoutes); // http://localhost:3000/api/scoreboard
 //app.use('/api/members', memberRoutes);       // http://localhost:3000/api/members
 //app.use('/api/users', userRoutes);          // http://localhost:3000/api/user

@@ -17,31 +17,23 @@
     <body>
         <div class="wrapper">
             <header>
-                <nav class="text_stretch" >
-                    <ul>
-                        <li><a href="Home.html">Home</a></li>
-                        <li><a href="IndvStats.html">Individual Stats</a></li>
-                        <li><a href="ScoreBoard.html">Score Board</a></li>
-                        <li><a href="Schedule.html">Schedule</a></li>
-                        <li><a href="DataEntry.html">Data Entry</a></li>
-                        <li><a href="DataAnalysis.html">Data Analysis</a></li>
-                        <li><a href="Admin.html">Admin</a></li>
-                    </ul>
-                </nav>
+                <!-- load nav.html with load-common.js -->
             </header>
 
             
             <div class="content">
                 <img class= "items" src="images/CommingSoon.png">
             </div>
+
+            <footer>
+                <!-- load footer.html with load-common.js -->
+            </footer>
         </div>
-        </div>
+
+        <script src="src/auth.guard.js" type="module"></script>
+        <script src="src/auth.js" type="module"></script>
+        <script src="src/load-common.js" type="module"></script>
+        <script src="src/GuildScoreBoard.js" type="module"></script>
     </body>
-
-    <footer>
-        <p class="text_stretch" id="foot">Developed by Matthew Bass: mbass001@regis.edu</p>
-    </footer>
-
-    <script src="src/GuildScoreBoard.js" type="module"></script>
-
+    
 </html>

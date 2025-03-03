@@ -104,6 +104,7 @@ export const _post = async (url, data, options = DEFAULT_OPTIONS) => {
     console.log('POST response data:', responseData);
 
     return responseData;
+
   } catch (error) {
     console.error('POST request error:', error);
 

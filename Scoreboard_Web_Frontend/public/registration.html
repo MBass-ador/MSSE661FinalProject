@@ -23,24 +23,27 @@
           <h1>Register</h1>
           <br>
 
-          <form novalidate>
+          <form id="regForm" novalidate>
 
             <label for="formInputUsernameReg">
               <span>User Name:</span>
-              <input id="formInputUsernameReg" type="text" placeholder="Username" />
+              <input id="formInputUsernameReg" type="text" 
+                     name="username" placeholder="Username" required>
             </label>
 
             <label for="formInputEmailReg">
               <span>Email:</span>
-              <input id="formInputEmailReg" type="email" placeholder="Email" />
+              <input id="formInputEmailReg" type="email" 
+                     name="email" placeholder="Email" required>
             </label>
 
             <label for="formInputPasswordReg">
               <span>Password:</span>
-              <input id="formInputPasswordReg" type="password" placeholder="Password" />
+              <input id="formInputPasswordReg" type="password" 
+                     name="password" placeholder="Password" required>
             </label>
  
-            <button onclick="doRegister(event)">Register</button>
+            <button type="submit">Register</button>
 
             <a class='auth_button' href="/">Already signed up?</a>
             
@@ -54,12 +57,15 @@
       </footer>
 
     </div>
-  </body>
 
   <script src="src/api.config.js"      type="module"></script>
   <script src="src/simple-storage.js"  type="module"></script>
   <script src="src/service-helpers.js" type="module"></script>
   <script src="src/auth.service.js"    type="module"></script>
   <script src="src/auth.js"            type="module"></script>
-
+  <script src="src/register.js"        type="module"></script>
+    
+  
+ 
+  </body>
 </html>
