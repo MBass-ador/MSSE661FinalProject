@@ -13,12 +13,17 @@ import path from 'path';
 
 import { fileURLToPath } from 'url';
 
+import fs from 'node:fs';
+
+import https from 'node:https';
+
 // new express router
 const app = express();
 
-// listen on default port 4000
-const port = process.env.PORT || 4000;
-
+// listen on default http port 4000
+const httpPort = process.env.PORT || 4000;
+// listen on https port 4443
+const httpsPort = process.env.HTTPS_PORT || 4443;
 
 // Get directory name
 const __filename = fileURLToPath(import.meta.url);
@@ -49,8 +54,23 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__publicPath, 'index.html'));
 });
 
+// configure https tunnel
+https
+  .createServer(
+    {
+      key: fs.readFileSync(__dirname + '/server.key'),
+      cert: fs.readFileSync(__dirname + '/server.cert'),
+    },
+    app
+  )
+  // listen on https port 4443
+  .listen(httpsPort, () => {
+    console.log('Server started at http://localhost:%s', httpsPort);
+  });
 
-// listen on port {'port' = 4000} and log
-app.listen(port, function() {
-  console.log('Server started at http://localhost:%s', port);
+
+
+// listen on http port 4000
+app.listen(httpPort, function() {
+  console.log('Server started at http://localhost:%s', httpPort);
 });
