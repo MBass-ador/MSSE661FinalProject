@@ -22,7 +22,44 @@
 
             
             <div class="content">
-                <img class= "items" src="images/CommingSoon.png">
+                <form id="updateForm" class="items" novalidate>
+
+                    <h1>Update</h1>
+                    <h1>User Data</h1>
+                    <br>
+                    
+                    <label for="formInputUsername">
+                        <span>Existing User Name:</span>
+                        <input id="formInputUsername" type="text" 
+                            name="username" placeholder="existing username" required>
+                    </label>
+                    
+                    <label for="formInputUsernameUpdate">
+                        <span>New User Name:</span>
+                        <input id="formInputUsernameUpdate" type="text" 
+                            name="newUsername" placeholder="new username" required>
+                    </label>
+
+                    
+                    <label for="formInputEmail">
+                        <span>New Email:</span>
+                        <input id="formInputEmail" type="email" 
+                            name="email" placeholder="new email" required/>
+                    </label>
+                    
+                    <label for="formInputPassword">
+                        <span>New Password:</span>
+                        <input id="formInputPassword" type="password" 
+                            name="password" placeholder="new password" required>
+
+                    <div class="form-group">
+                      <br>
+                      <button type="submit">
+                        Save Changes
+                      </button>
+                    </div>
+
+                  </form>
             </div>
 
             <footer>
@@ -30,10 +67,11 @@
             </footer>
         </div>
 
-        <script src="src/auth.guard.js" type="module"></script>
-        <script src="src/auth.js" type="module"></script>
-        <script src="src/load-common.js" type="module"></script>
-        <script src="src/GuildScoreBoard.js" type="module"></script>
+        <script src="src/auth.guard.js"         type="module"></script>
+        <script src="src/auth.js"               type="module"></script>
+        <script src="src/load-common.js"        type="module"></script>
+        <script src="src/GuildScoreBoard.js"    type="module"></script>
+        <script src="src/updateUser.js"         type="module"></script>
     </body>
     
 </html>

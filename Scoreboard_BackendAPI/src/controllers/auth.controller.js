@@ -2,11 +2,13 @@
 import connection from '../db_config.js';
 import bcrypt from 'bcryptjs';
 import query from '../utils/query.js';
+import escape from '../utils/escape.js';
 
 import {
     GET_USER_BY_NAME,
     GET_USER_WITH_PASSWORD_BY_NAME,
-    INSERT_NEW_USER
+    INSERT_NEW_USER,
+    UPDATE_USER,
 } from '../queries/user.queries.js';
 
 import {
@@ -27,14 +29,30 @@ import {
  * @returns              -  JSON: Response / Error
  */
 export const register = async (req, res) => {
+    console.log('Received registration request:', req.body);
+    // hash password
+    const saltRounds = 10;
+    let hashedPassword;
+    try {
+        hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+    } catch (error) {
+        console.error('error hashing password:', error);
+        return res  // sadness :(
+                .status(500)
+                .json({ msg: 'error hashing password' });
+    }
+    console.log('hashed password:', hashedPassword);
 
-    // destructure request body
+    // destructure and escape request body
     const { 
         username, 
-        email, 
-        password } = req.body;
+        email,
+        password } = escape({
+            ...req.body,
+            password: hashedPassword
+          });
 
-    //console.log('received data:', { username, email, password });
+    console.log('received data:', { username, email, password });
 
     // Check if all required fields are present
     if (!username || !email || !password) {
@@ -57,7 +75,7 @@ export const register = async (req, res) => {
         );
 
         if (existingUser.length > 0) {
-            //console.log('User already exists:', username);
+            console.log('User already exists:', username);
             
             return res  // username already exists
                     .status(403)
@@ -70,29 +88,17 @@ export const register = async (req, res) => {
                 .json({msg: 'error checking db for user'});
     }
 
-    // hash password
-    const saltRounds = 10;
-    let hashedPassword;
-    try {
-        hashedPassword = await bcrypt.hash(password, saltRounds);
-    } catch (error) {
-        console.error('error hashing password:', error);
-        return res  // sadness :(
-                .status(500)
-                .json({ msg: 'error hashing password' });
-    }
-
     // create new user
     try {
         await query(con, INSERT_NEW_USER(), [username, email, hashedPassword]);
         
-        //console.log('User created successfully:', username);
+        console.log('User created successfully:', username);
         
         return res  // success :)
                 .status(201)
                 .json({ msg: 'user created successfully' });
     } catch (error) {
-        //console.error("error saving to db", error);
+        console.error("error saving to db", error);
         return res  // sadness :(
                 .status(501)
                 .json({ msg: 'error saving to db'  });
@@ -107,15 +113,18 @@ export const register = async (req, res) => {
  * @returns               -  JSON: Response / Error
  */
 export const login = async (req, res) => {
+    console.log('received login request:', req.body);
     // extract username and password from request body
     const { 
         username, 
-        password } = req.body;
-    
+        password } = escape(req.body);
+        console.log('escaped data:', { username, password });
+
     // make async connection
     const con = await connection()
     .catch((err) => {
-        throw err;
+        console.error('error connecting to the database:', err);
+        return res.status(500).json({ msg: 'error connecting to the database' });
     });
 
     // check for existing user
@@ -125,7 +134,7 @@ export const login = async (req, res) => {
             GET_USER_WITH_PASSWORD_BY_NAME(),
             [username] // pass as array
         );
-        //console.log( 'found existing user:', existingUser[0] );
+        console.log( 'found existing user:', existingUser[0] );
         
         if (existingUser.length > 0) {
             // check for matching password
@@ -163,7 +172,7 @@ export const login = async (req, res) => {
                     })
                 }
             } catch (error) {
-                //console.error('error comparing passwords:', error);
+                console.error('error comparing passwords:', error);
                 return res
                     .status(500)
                     .json({ msg: 'error attempting to match passwords' });
@@ -218,11 +227,63 @@ export const logout = async (req, res) => {
     }
 };
 
+/**
+ * Update User Details
+ *
+ * @param {Object} req - Request Object
+ * @param {Object} res - Response Object
+ * @returns - JSON: Response / Error
+ */
+export const updateUser = async (req, res) => {
+    
+    // hash password
+    const saltRounds = 10;
+    let hashedPassword;
+    try {
+        hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+    } catch (error) {
+        console.error('error hashing password:', error);
+        return res  // sadness :(
+                .status(500)
+                .json({ msg: 'error hashing password' });
+    }
+    console.log('hashed password:', hashedPassword);
+
+    // destructure and escape request body
+    const { 
+        username,
+        newUsername, 
+        email,
+        password } = escape({
+            ...req.body,
+            password: hashedPassword
+          });
+    
+    
+    //const { username, newUsername, email, password } = escape(req.body);
+
+    // make async connection
+    const con = await connection().catch((err) => {
+        console.error('error connecting to the database:', err);
+        return res.status(500).json({ msg: 'error connecting to the database' });
+    });
+
+    // update user details
+    try {
+        await query(con, UPDATE_USER(), [newUsername, email, password, username]);
+        console.log('user updated successfully:', { newUsername, email } + "password: protected");
+        return res.status(202).json({ msg: 'user updated successfully' });
+    } catch (error) {
+        console.error('Error updating user:', error);
+        return res.status(500).json({ msg: 'error updating user' });
+    }
+};
+
 
 /**
  *    Refreshes Access Token
  * 
- * @param {Object} req   - Request Object
+ * @param {Object} req   - refresh token
  * @param {Object} res   - Response Object
  * @returns              - JSON: Response / Error
  */

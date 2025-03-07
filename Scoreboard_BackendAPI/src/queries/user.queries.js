@@ -9,9 +9,9 @@ export const CREATE_USERS_TABLE = `CREATE TABLE IF NOT EXISTS users(
 // CRUD queries
 
 // add new user 
-export const INSERT_NEW_USER = (username, email, password) => 
+export const INSERT_NEW_USER = () => 
   `INSERT INTO users (username, email, password) 
-            VALUES (?, ?, ?)`;
+             VALUES (?, ?, ?)`;
 
 
 // get user               (by name)               (does not return password)
